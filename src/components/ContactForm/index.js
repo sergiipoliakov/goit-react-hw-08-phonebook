@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { phoneBookOperations, phoneBookSelectors } from '../../redux/phoneBook';
-
-import DublicateAlert from '../DublicateAlert/DublicateAlert';
-import Button from '../Button/Button';
+import DublicateAlert from '../DublicateAlert';
 import { CSSTransition } from 'react-transition-group';
 
-import './ContactForm.css';
+import styles from './ContactForm.module.css';
 
 class ContactForm extends Component {
   static defaultProps = {};
@@ -76,37 +73,40 @@ class ContactForm extends Component {
       <>
         <CSSTransition
           in={dublicateName && Boolean(name)}
-          classNames="dublucate-name-slideIn"
+          classNames={styles}
           timeout={250}
           unmountOnExit
         >
           <DublicateAlert name={name} />
         </CSSTransition>
 
-        <form onSubmit={this.handleSubmit} className="form">
-          <label className="form-label">
+        <form onSubmit={this.handleSubmit} className={styles.form}>
+          <label className={styles.label}>
             Name
             <input
-              className="form-input"
+              className={styles.input}
               type="name"
               value={name}
               onChange={this.handleChange}
+              placeholder="name: Sergii Poliakov"
               name="name"
             />
           </label>
 
-          <label className="form-label">
+          <label className={styles.label}>
             Number
             <input
-              className="form-input"
+              className={styles.input}
               type="tel"
               value={number}
+              placeholder="tel: 096-123-12-12"
               onChange={this.handleChange}
               name="number"
             />
           </label>
-
-          <Button label="Add contact" type="submit" />
+          <button type="submit" className={styles.button}>
+            Add contact
+          </button>
         </form>
       </>
     );

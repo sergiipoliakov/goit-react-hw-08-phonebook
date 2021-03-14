@@ -9,7 +9,7 @@ function UserMenu({ avatar, name, onLogout }) {
     <div className={styles.container}>
       <img src={avatar} alt="" width="32" className={styles.avatar} />
       <span className={styles.name}>Добро пожаловать, {name}</span>
-      <button type="button" onClick={onLogout}>
+      <button className={styles.button} type="button" onClick={onLogout}>
         Выйти
       </button>
     </div>
@@ -17,7 +17,7 @@ function UserMenu({ avatar, name, onLogout }) {
 }
 const mapStateToProps = state => ({
   avatar: defaultAvatar,
-  name: authSelectors.getUserName(state),
+  name: authSelectors.getUserEmail(state),
 });
 
 const mapDispatchToProps = {

@@ -1,17 +1,10 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { authOperations } from '../redux/auth';
+import { authOperations } from '../../redux/auth';
+import { CSSTransition } from 'react-transition-group';
+import Title from '../../components/Title/Title';
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
+import styles from './LoginView.module.css';
 
 class LoginView extends Component {
   state = {
@@ -36,34 +29,48 @@ class LoginView extends Component {
 
     return (
       <div>
-        <h1>Страница логина</h1>
+        <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames={styles}
+          unmountOnExit
+        >
+          <Title label="Страница ЛОГИНА" />
+        </CSSTransition>
 
         <form
+          className={styles.form}
           onSubmit={this.handleSubmit}
-          style={styles.form}
           autoComplete="off"
         >
-          <label style={styles.label}>
+          <label className={styles.label}>
             Почта
             <input
+              className={styles.input}
               type="email"
               name="email"
               value={email}
+              placeholder="Ivanov@mail.com"
               onChange={this.handleChange}
             />
           </label>
 
-          <label style={styles.label}>
+          <label className={styles.label}>
             Пароль
             <input
+              className={styles.input}
               type="password"
               name="password"
               value={password}
+              placeholder="password"
               onChange={this.handleChange}
             />
           </label>
 
-          <button type="submit">Войти</button>
+          <button className={styles.button} type="submit">
+            Войти
+          </button>
         </form>
       </div>
     );

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component, lazy, Suspense } from 'react';
+import { Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authOperations } from './redux/auth';
 import routes from './routes';
@@ -7,10 +7,13 @@ import routes from './routes';
 import Container from './components/Container';
 
 import AppBar from './components/AppBar';
-import HomeView from './views/Home';
-import PhoneBookView from './views/PhoneBookView';
-import LoginView from './views/LoginView';
-import RegisterView from './views/RegisterView';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+
+const HomeView = lazy(() => import('./views/Home'));
+const LoginView = lazy(() => import('./views/LoginView/index'));
+const RegisterView = lazy(() => import('./views/RegisterView/index'));
+const PhoneBookView = lazy(() => import('./views/PhoneBookView/index'));
 
 class App extends Component {
   componentDidMount() {
@@ -21,13 +24,31 @@ class App extends Component {
     return (
       <Container>
         <AppBar />
-
-        <Switch>
-          <Route path={routes.home} exact component={HomeView} />
-          <Route path={routes.phoneBook} exact component={PhoneBookView} />
-          <Route path={routes.login} exact component={LoginView} />
-          <Route path={routes.register} exact component={RegisterView} />
-        </Switch>
+        <Suspense fallback={<p>Загружаю...</p>}>
+          <Switch>
+            <PublicRoute path={routes.home} exact component={HomeView} />
+            <PrivateRoute
+              path={routes.phoneBook}
+              exact
+              redirectTo={routes.login}
+              component={PhoneBookView}
+            />
+            <PublicRoute
+              path={routes.login}
+              exact
+              redirectTo={routes.phoneBook}
+              restricted
+              component={LoginView}
+            />
+            <PublicRoute
+              path={routes.register}
+              exact
+              redirectTo={routes.phoneBook}
+              restricted
+              component={RegisterView}
+            />
+          </Switch>
+        </Suspense>
       </Container>
     );
   }

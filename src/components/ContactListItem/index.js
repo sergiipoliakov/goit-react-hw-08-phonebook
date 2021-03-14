@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
 import styles from './ContactListItem.module.css';
 
 const ContactListItem = ({ id, name, number, onRemove }) => (
@@ -7,12 +6,9 @@ const ContactListItem = ({ id, name, number, onRemove }) => (
     <p className={styles.name}>{name}: </p>
     <div className={styles.actions}>
       <p className={styles.number}>{number}</p>
-      <Button
-        label="Delete"
-        type="button"
-        className="ContactList-button"
-        onClick={onRemove}
-      />
+      <button type="button" className={styles.button} onClick={onRemove}>
+        Delete
+      </button>
     </div>
   </li>
 );

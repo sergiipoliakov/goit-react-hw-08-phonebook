@@ -1,6 +1,6 @@
 export default {
   home: '/',
-  phoneBook: '/phoneBook',
+  phoneBook: '/contacts',
   login: '/login',
   register: '/register',
 };
