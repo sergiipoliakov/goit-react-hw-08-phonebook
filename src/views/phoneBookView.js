@@ -4,9 +4,8 @@ import { phoneBookOperations, phoneBookSelectors } from '../redux/phoneBook';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
-import CounterButton from '../components/CounterButton';
 
-class phoneBookView extends Component {
+class PhoneBookView extends Component {
   componentDidMount() {
     this.props.fetchContacts();
   }
@@ -15,7 +14,6 @@ class phoneBookView extends Component {
     return (
       <>
         <Layout>
-          <CounterButton />
           {this.props.isLoadingPhoneBook && <h1>Загржаем...</h1>}
           <ContactForm />
 
@@ -33,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
   fetchContacts: () => dispatch(phoneBookOperations.fetchContacts()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(phoneBookView);
+export default connect(mapStateToProps, mapDispatchToProps)(PhoneBookView);
