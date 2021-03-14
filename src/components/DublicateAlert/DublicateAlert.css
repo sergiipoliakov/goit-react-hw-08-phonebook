@@ -1,0 +1,37 @@
+.dublucate-name {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* text-align: center; */
+
+  width: 300px;
+  height: 75px;
+  background: red;
+  color: #fff;
+  overflow: hidden;
+}
+
+.dublucate-name-slideIn-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.dublucate-name-slideIn-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 250ms linear;
+}
+
+.dublucate-name-slideIn-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dublucate-name-slideIn-exit-active {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: all 250ms linear;
+}

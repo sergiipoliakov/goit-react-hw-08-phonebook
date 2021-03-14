@@ -1,0 +1,17 @@
+.filter-slideIn-enter {
+  transform: translateX(100%);
+}
+
+.filter-slideIn-enter-active {
+  transform: translateX(0);
+  transition: transform 500ms linear;
+}
+
+.filter-slideIn-exit {
+  transform: translateX(0);
+}
+
+.filter-slideIn-exit-active {
+  transform: translateX(100%);
+  transition: all 500ms linear;
+}
