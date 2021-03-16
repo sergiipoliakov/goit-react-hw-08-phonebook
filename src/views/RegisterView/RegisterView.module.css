@@ -66,3 +66,25 @@
   transform: translateX(0);
   transition: transform 500ms linear;
 }
+
+.dublucate-name-slideIn-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.dublucate-name-slideIn-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 250ms linear;
+}
+
+.dublucate-name-slideIn-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dublucate-name-slideIn-exit-active {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: all 250ms linear;
+}

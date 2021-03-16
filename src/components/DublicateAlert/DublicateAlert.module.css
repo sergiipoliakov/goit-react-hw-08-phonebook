@@ -1,7 +1,7 @@
-.dublucate-name {
+.dublucate {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,24 +14,24 @@
   overflow: hidden;
 }
 
-/* .dublucate-name-slideIn-enter {
+.enter {
   opacity: 0;
   transform: translateX(-100%);
 }
 
-.dublucate-name-slideIn-enter-active {
+.enterActive {
   opacity: 1;
   transform: translateX(0);
   transition: all 250ms linear;
 }
 
-.dublucate-name-slideIn-exit {
+.exit {
   opacity: 1;
   transform: translateX(0);
 }
 
-.dublucate-name-slideIn-exit-active {
+.exitActive {
   opacity: 1;
   transform: translateX(100%);
   transition: all 250ms linear;
-} */
+}

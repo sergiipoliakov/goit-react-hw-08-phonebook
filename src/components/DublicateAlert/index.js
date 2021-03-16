@@ -1,14 +1,32 @@
 import PropTypes from 'prop-types';
-import './DublicateAlert.css';
+import { CSSTransition } from 'react-transition-group';
 
-export default function DublicateAlert({ name = 'no name' }) {
+import styles from './DublicateAlert.module.css';
+
+export default function DublicateAlert({ name, text, showAlert }) {
   return (
-    <div className="dublucate-name">
-      <p>"{name}" is already in contacts</p>
-    </div>
+    <CSSTransition
+      in={showAlert}
+      classNames={styles}
+      timeout={250}
+      unmountOnExit
+    >
+      <div className={styles.dublucate}>
+        <p>
+          {name} {text}
+        </p>
+      </div>
+    </CSSTransition>
   );
 }
 
+DublicateAlert.defaultProps = {
+  name: '',
+  showAlert: false,
+  text: '',
+};
 DublicateAlert.propTypes = {
   name: PropTypes.string.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
 };

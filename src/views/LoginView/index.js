@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations } from '../../redux/auth';
 import { CSSTransition } from 'react-transition-group';
+import DublicateAlert from '../../components/DublicateAlert';
 import Title from '../../components/Title/Title';
 
 import styles from './LoginView.module.css';
@@ -10,6 +11,8 @@ class LoginView extends Component {
   state = {
     email: '',
     password: '',
+    showAlert: false,
+    message: '',
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -21,14 +24,38 @@ class LoginView extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
+    const messageError = this.props.errorMessage;
+
+    console.log(messageError);
+
+    if (messageError === 'Request failed with status code 400') {
+      this.setState({
+        message: 'incorect password ader email!',
+        showAlert: true,
+      });
+      return setTimeout(() => {
+        this.setState({
+          showAlert: false,
+          message: '',
+        });
+      }, 2500);
+    }
+
     this.props.onLogin(this.state);
-    this.setState({ name: '', email: '', password: '' });
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      showAlert: false,
+      message: '',
+    });
   };
   render() {
-    const { email, password } = this.state;
+    const { email, password, message, showAlert } = this.state;
 
     return (
       <div>
+        <DublicateAlert text={message} showAlert={showAlert} />
         <CSSTransition
           in={true}
           appear={true}
@@ -76,9 +103,12 @@ class LoginView extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  errorMessage: state.auth.error,
+});
 
 const mapDispatchToProps = {
   onLogin: authOperations.logIn,
 };
 
-export default connect(null, mapDispatchToProps)(LoginView);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

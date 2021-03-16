@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { phoneBookOperations, phoneBookSelectors } from '../../redux/phoneBook';
 import DublicateAlert from '../DublicateAlert';
-import { CSSTransition } from 'react-transition-group';
 
 import styles from './ContactForm.module.css';
 
@@ -71,14 +70,11 @@ class ContactForm extends Component {
 
     return (
       <>
-        <CSSTransition
-          in={dublicateName && Boolean(name)}
-          classNames={styles}
-          timeout={250}
-          unmountOnExit
-        >
-          <DublicateAlert name={name} />
-        </CSSTransition>
+        <DublicateAlert
+          name={name}
+          showAlert={dublicateName && Boolean(name)}
+          text={'is ready exist'}
+        />
 
         <form onSubmit={this.handleSubmit} className={styles.form}>
           <label className={styles.label}>
