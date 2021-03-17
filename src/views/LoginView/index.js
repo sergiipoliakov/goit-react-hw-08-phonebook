@@ -28,6 +28,9 @@ class LoginView extends Component {
 
     console.log(messageError);
 
+    if (messageError !== null) {
+    }
+
     if (messageError === 'Request failed with status code 400') {
       this.setState({
         message: 'incorect password ader email!',
